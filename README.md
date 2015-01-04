@@ -13,9 +13,9 @@ Completed user stories:
  * [x] Required: Edit item in the list by short clicking on the item using a new activity with a textfield and a button. 
 
 Notes:
- 1.) However the “Developer Options/Apps/Don’t keep activities” is checked, the debugger still kept the activities. Good example is while having the Edit Item activity running press the home button, then starting the app again the Edit Item activity comes back.  For this reason the gif file below with user stories does not include the Save/Load items on Stop/Start of the app.  Tested on an actual device, Nexus 7, and works fine on it.
- 2.) The walk-through slides say use Minimum SDK API 16 during setup, but later after the walkthrough the website says API 14 should be used. The app currently uses API 16.
- 3.) FocusRequest for the textfield on the Edit Item activity does not bring up the keyboard, but it is in focus (meaning works fine in debugger when you use actual pc keyboard).
+ 1. However the “Developer Options/Apps/Don’t keep activities” is checked, the debugger still kept the activities. Good example is while having the Edit Item activity running press the home button, then starting the app again the Edit Item activity comes back.  For this reason the gif file below with user stories does not include the Save/Load items on Stop/Start of the app.  Tested on an actual device, Nexus 7, and works fine on it.
+ 2. The walk-through slides say use Minimum SDK API 16 during setup, but later after the walkthrough the website says API 14 should be used. The app currently uses API 16.
+ 3. FocusRequest for the textfield on the Edit Item activity does not bring up the keyboard, but it is in focus (meaning works fine in debugger when you use actual pc keyboard).
  
 Walkthrough of all user stories (except Start/Stop app):
 
