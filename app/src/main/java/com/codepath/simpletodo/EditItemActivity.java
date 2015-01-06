@@ -13,7 +13,9 @@ import android.widget.TextView;
 public class EditItemActivity extends ActionBarActivity {
 
     EditText etEditText;
+    EditText etEditDueDate;
     String strItem;
+    String strDueDate;
     int    idxItem;
 
     @Override
@@ -22,12 +24,17 @@ public class EditItemActivity extends ActionBarActivity {
         setContentView(R.layout.activity_edit_item);
 
         strItem = getIntent().getStringExtra("strItem");
+        strDueDate = getIntent().getStringExtra("strDueDate");
         idxItem = getIntent().getIntExtra("idxItem", 0);
+
 
         etEditText = (EditText) findViewById(R.id.etEditItem);
         etEditText.setText(strItem);
         etEditText.setSelection(strItem.length());
         etEditText.requestFocus();
+
+        etEditDueDate = (EditText) findViewById(R.id.etEditDueDate);
+        etEditDueDate.setText(strDueDate);
     }
 
 
@@ -55,9 +62,11 @@ public class EditItemActivity extends ActionBarActivity {
 
     public void onSaveItem(View view) {
         strItem = etEditText.getText().toString();
+        strDueDate = etEditDueDate.getText().toString();
 
         Intent data = new Intent();
         data.putExtra("strItem", strItem);
+        data.putExtra("strDueDate", strDueDate);
         data.putExtra("idxItem", idxItem);
 
         setResult(RESULT_OK, data);
