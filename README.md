@@ -14,6 +14,7 @@ Completed user stories:
  * [x] Suggested: Persist the todo items into SQLite instead of text file. Use ActiveAndroid wrapper. 
  * [x] Suggested: Improve style of the todo items in the list using a custom adapter.
  * [x] Suggested: Add support for completion due dates for todo items (and display in the listview item)
+ * [x] Suggested: Use a DialogFragment instead of new Activity for editing items.
  * [x] Optional: Added header as a first item in the listview, not part of the db, non-editable and non-deletable.
 
 Notes:
@@ -25,7 +26,7 @@ Notes:
  6. Some modifications for the xml-s (MainActivity, EditItemActivity and todo_items) to create a better/more logical view.
  7. Due Data TextField is set to Date type, but no validity check is made on any TextFields.
  
-Walkthrough of all user stories (except Start/Stop app):
+Walkthrough of all user stories:
 
 ![Video Walkthrough](simple_todo.gif)
 

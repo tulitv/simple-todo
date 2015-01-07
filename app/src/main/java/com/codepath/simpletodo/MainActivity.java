@@ -1,5 +1,8 @@
 package com.codepath.simpletodo;
 
+import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 
 import android.content.Intent;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends /*FragmentActivity*/ ActionBarActivity implements EditItemDialog.EditItemDialogListener{
 
     ArrayList<TodoItem> items;
     TodoItemsAdapter itemsAdapter;
@@ -120,12 +123,7 @@ public class MainActivity extends ActionBarActivity {
 
                             TodoItem todoItem;
                             todoItem = items.get(pos);
-
-                            Intent i = new Intent(MainActivity.this, EditItemActivity.class);
-                            i.putExtra("strItem", todoItem.itemName);
-                            i.putExtra("strDueDate", todoItem.itemDueDate);
-                            i.putExtra("idxItem", pos);
-                            startActivityForResult(i, REQUEST_CODE_SAVE);
+                            showEditDialog(todoItem.itemName, todoItem.itemDueDate, pos);
                         }
                     }
                 }
@@ -140,32 +138,31 @@ public class MainActivity extends ActionBarActivity {
         items.add(0,header);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if ((resultCode==RESULT_OK) && (requestCode==REQUEST_CODE_SAVE)) {
-            String strItem = data.getStringExtra("strItem");
-            String strDueDate = data.getStringExtra("strDueDate");
-            int idxItem = data.getIntExtra("idxItem", 0);
-
-            // not default value, otherwise something went wrong
-            if (idxItem!=0) {
-                TodoItem todoItem = items.get(idxItem);
-                todoItem.itemName = strItem;
-                todoItem.itemDueDate = strDueDate;
-                todoItem.save();
-
-                items.remove(idxItem);
-                items.add(idxItem, todoItem);
-                itemsAdapter.notifyDataSetChanged();
-            }
-        }
-
-    }
-
     public static List<TodoItem> getAll() {
         return new Select()
                 .from(TodoItem.class)
                 .execute();
+    }
+
+    private void showEditDialog(String itemName, String itemDueDate, int pos) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditItemDialog editItemDialog = EditItemDialog.newInstance("Edit Item",
+                itemName, itemDueDate, pos);
+        editItemDialog.show(fm, "fragment_edit_item");
+    }
+
+    public void onFinishEditItemDialog(String itemName, String itemDueDate, int pos) {
+        // not default value, otherwise something went wrong
+        if (pos!=0) {
+            TodoItem todoItem = items.get(pos);
+            todoItem.itemName = itemName;
+            todoItem.itemDueDate = itemDueDate;
+            todoItem.save();
+
+            items.remove(pos);
+            items.add(pos, todoItem);
+            itemsAdapter.notifyDataSetChanged();
+        }
     }
 }
 
